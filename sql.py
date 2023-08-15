@@ -9,9 +9,13 @@ def get_connection():
         
     return thread_local.connection
 
-conn = get_connection()
-cur = conn.cursor()
+def get_cursor():
+    if not hasattr(thread_local, "cursor"):
+        thread_local.cursor = get_connection().cursor()
+        
+    return thread_local.cursor  
 
 def get_article(index:int):
+    cur = get_cursor()
     cur.execute(f'SELECT id, title, abstract FROM astro WHERE "index" = {index}')
     return cur.fetchone()
