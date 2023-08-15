@@ -1,7 +1,6 @@
 from sql import get_article
 
 from sentence_transformers import SentenceTransformer, util
-import pandas as pd
 import torch
 
 device = torch.device("cpu")
