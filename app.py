@@ -9,7 +9,10 @@ query_input = st.text_input("Prompt:")
 n_articles = st.slider("Number of articles:", 1, 20, 5)
 
 if query_input:  # Check if query_input is not blank
-    results = query(query_input, n_articles)
+    try:
+        results = query(query_input, n_articles)
+    except Exception as e:
+        st.error(f"Error occurred: {e}")
 
     for i, result in enumerate(results, start=1):
         article, score = result
